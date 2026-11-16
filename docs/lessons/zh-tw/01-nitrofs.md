@@ -1,5 +1,6 @@
 ---
 lesson: 1
+lang: zh-tw
 title: 讀 ROM 的 NitroFS 檔案系統
 date: 2026-11-16
 milestone: 1
