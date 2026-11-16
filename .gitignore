@@ -1,0 +1,5 @@
+__ROMs__/
+*.nds
+bin/
+obj/
+out/
