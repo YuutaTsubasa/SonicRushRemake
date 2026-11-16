@@ -1,4 +1,5 @@
 __ROMs__/
+__docs__/
 *.nds
 bin/
 obj/

@@ -1,3 +1,7 @@
 ﻿namespace Rush.Tools.ListFiles;
 
-public record RomFile();
+public record struct RomFile(
+    ushort Id,
+    string Path,
+    uint Offset,
+    uint Size);
