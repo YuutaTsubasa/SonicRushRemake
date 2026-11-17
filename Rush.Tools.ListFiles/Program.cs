@@ -1,5 +1,11 @@
 ﻿using Rush.Core.Rom;
 
+if (args.Length != 1)
+{
+    Console.Error.WriteLine("Usage: Rush.Tools.ListFiles <rom.nds>");
+    return;
+}
+
 try
 {
     var rom = NdsRom.Load(args[0]);

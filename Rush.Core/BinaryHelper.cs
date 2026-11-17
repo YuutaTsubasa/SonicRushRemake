@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Rush.Core;
 
-public static class BinaryLittleEndianHelper
+public static class BinaryHelper
 {
     
     public static ushort ReadUInt16(this ReadOnlySpan<byte> data, int offset) =>
@@ -27,5 +27,14 @@ public static class BinaryLittleEndianHelper
         var length = checked((int)size);
 
         return data.Slice(start, length);
+    }
+    
+    public static byte GetBit(this byte data, int index)
+        => (byte)((data >> index) & 1);
+
+    public static byte GetBits(this byte data, int index, int size)
+    {
+        var mask = 0xFF >> (8 - size);
+        return (byte)((data >> index) & mask);
     }
 }

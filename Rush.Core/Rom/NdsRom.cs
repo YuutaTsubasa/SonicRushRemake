@@ -31,4 +31,11 @@ public class NdsRom
     }
 
     public static NdsRom Load(string fileName) => new(File.ReadAllBytes(fileName));
+
+    public ReadOnlyMemory<byte> Read(RomFile file) => _data.ReadSection(file.Offset, file.Size);
+
+    public ReadOnlyMemory<byte> Read(string path)
+        => _filesByPath.TryGetValue(path, out var file)
+            ? Read(file)
+            : throw new FileNotFoundException($"Not in NitroFS: {path}");
 };
