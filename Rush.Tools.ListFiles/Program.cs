@@ -1,8 +1,8 @@
-﻿using Rush.Tools.ListFiles;
+﻿using Rush.Core.Rom;
 
 try
 {
-    var rom = new Rom(args[0]);
+    var rom = NdsRom.Load(args[0]);
     foreach (var romFile in rom.Files)
     {
         Console.WriteLine($"{romFile.Path}\t{romFile.Size:N0} bytes");

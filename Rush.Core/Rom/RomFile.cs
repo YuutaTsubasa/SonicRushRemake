@@ -1,4 +1,4 @@
-﻿namespace Rush.Tools.ListFiles;
+﻿namespace Rush.Core.Rom;
 
 public record struct RomFile(
     ushort Id,

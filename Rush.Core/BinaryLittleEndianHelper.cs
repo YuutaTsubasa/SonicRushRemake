@@ -1,8 +1,7 @@
 ﻿using System.Buffers.Binary;
-using System.Collections.Immutable;
 using System.Text;
 
-namespace Rush.Tools.ListFiles;
+namespace Rush.Core;
 
 public static class BinaryLittleEndianHelper
 {
@@ -19,14 +18,14 @@ public static class BinaryLittleEndianHelper
         Encoding.ASCII.GetString(
             data.Slice(offset, size));
 
-    public static ReadOnlySpan<byte> ReadSection(
-        this byte[] data,
+    public static ReadOnlyMemory<byte> ReadSection(
+        this ReadOnlyMemory<byte> data,
         uint offset,
         uint size)
     {
         var start = checked((int)offset);
         var length = checked((int)size);
 
-        return data.AsSpan(start, length);
+        return data.Slice(start, length);
     }
 }

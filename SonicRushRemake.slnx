@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Rush.Core/Rush.Core.csproj" />
+  <Project Path="Rush.Tools.Extract/Rush.Tools.Extract.csproj" />
+  <Project Path="Rush.Tools.ListFiles/Rush.Tools.ListFiles.csproj" />
+</Solution>
