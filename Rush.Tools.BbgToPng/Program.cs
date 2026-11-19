@@ -12,7 +12,7 @@ if (args.Length is < 2 or > 3)
 try
 {
     var rom = NdsRom.Load(args[0]);
-    var bbg = Bbg.Parse(rom.Read(args[1]).Span);
+    var bbg = Bbg.Parse(rom.ReadNested(args[1]).Span);
     var image = BbgRenderer.Render(bbg);
 
     var outputDirectory = args.Length == 3 ? args[2] : "out";

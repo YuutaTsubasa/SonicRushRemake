@@ -2,7 +2,7 @@
 
 namespace Rush.Core.Rom;
 
-public class NdsRom
+public class NdsRom : IFileArchive
 {
     private const int FNT_OFFSET_HEADER_OFFSET = 0x40, FNT_OFFSET_HEADER_SIZE = 4;
     private const int FNT_SIZE_HEADER_OFFSET = 0x44, FNT_SIZE_HEADER_SIZE = 4;

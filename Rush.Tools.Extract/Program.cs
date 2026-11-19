@@ -14,7 +14,7 @@ if (args.Length is < 2 or > 3)
 try
 {
     var rom = NdsRom.Load(args[0]);
-    var raw = rom.Read(args[1]).Span;
+    var raw = rom.ReadNested(args[1]).Span;
     var data = Lz77.IsCompressed(raw) ? Lz77.Decompress(raw).ToArray() : raw.ToArray();
 
     var outputDirectory = args.Length == 3 ? args[2] : DEFAULT_OUTPUT_DIRECTORY;
