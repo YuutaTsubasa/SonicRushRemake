@@ -1,0 +1,16 @@
+<Project Sdk="NetWasm.Sdk/0.14.2">
+  <PropertyGroup>
+    <OutputType>JsModule</OutputType>
+    <NetWasmJavaScriptHosts>page</NetWasmJavaScriptHosts>
+    <TargetFramework>netwasm0.1</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+  <ItemGroup>
+    <NetWasmJavaScriptModule Include="app.host.mjs" Module="app.host" />
+    <Content Include="index.html;app.mjs" CopyToPublishDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Rush.Core\Rush.Core.csproj" />
+  </ItemGroup>
+</Project>

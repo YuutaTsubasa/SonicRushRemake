@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Sonic Rush Remake</title>
+        <style>
+            html, body {
+                height: 100%;
+                margin: 0;
+            }
+            
+            body {
+                display: flex;
+                flex-direction: column;
+                background: #000000;
+                color: #cccccc;
+                font: 14px system-ui, sans-serif;
+            }
+            
+            header {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+                align-items: center;
+                padding: 8px 16px;
+            }
+            
+            #stage {
+                flex: 1;
+                min-height: 0;
+                display: grid;
+                place-items: center;
+                overflow: hidden;
+            }
+            
+            #screen {
+                image-rendering: pixelated;
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <label>ROM <input id="rom" type="file" accept=".nds"></label>
+            <span id="title">Pick your Sonic Rush ROM. It stays on this computer.</span>
+        </header>
+        <main id="stage">
+            <canvas id="screen" width="0" height="0"></canvas>
+        </main>
+        <script type="module" src="./app.mjs"></script>
+    </body>
+</html>

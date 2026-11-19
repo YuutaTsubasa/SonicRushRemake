@@ -11,7 +11,7 @@ public static class Lz77
     public static bool IsCompressed(ReadOnlySpan<byte> data)
         => data.Length >= HEADER_SIZE && data[TYPE_OFFSET] == TYPE;
 
-    public static byte[] Decompress(ReadOnlySpan<byte> data)
+    public static ReadOnlyMemory<byte> Decompress(ReadOnlySpan<byte> data)
     {
         if (!IsCompressed(data))
             throw new InvalidDataException("Not LZ77 Data (first byte must be 0x10)");

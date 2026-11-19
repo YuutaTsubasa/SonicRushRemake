@@ -3,7 +3,7 @@
 if (args.Length != 1)
 {
     Console.Error.WriteLine("Usage: Rush.Tools.ListFiles <rom.nds>");
-    return;
+    return 2;
 }
 
 try
@@ -16,8 +16,10 @@ try
 
     Console.WriteLine();
     Console.WriteLine($"Total files: {rom.Files.Length}");
+    return 0;
 }
 catch (Exception ex)
 {
     Console.Error.WriteLine($"Error: {ex.Message}");
+    return 1;
 }
