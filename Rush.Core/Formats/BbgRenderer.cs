@@ -7,27 +7,20 @@ public static class BbgRenderer
     private const int TILE_SIZE = 8;
     private const int COLORS_PER_PALETTE_4BPP = 16;
     private const int COLORS_PER_PALETTE_8BPP = 256;
-
-    private readonly record struct MapEntry(ushort Raw)
-    {
-        public int Tile => Raw.GetBits(0, 10);
-        public bool FlipX => Raw.GetBit(10) != 0;
-        public bool FlipY => Raw.GetBit(11) != 0;
-        public int Palette => Raw.GetBits(12, 4);
-    }
+    private const byte OPAQUE = 0xFF;
 
     public static RgbaImage Render(Bbg bbg)
     {
         var entryCount = bbg.WidthInTiles * bbg.HeightInTiles;
-        if (bbg.Map.Length != entryCount * sizeof(ushort))
+        if (bbg.Map.Length != entryCount * TileMapEntry.SIZE)
             throw new InvalidDataException(
-                $"Map has {bbg.Map.Length} bytes, expected {entryCount * sizeof(ushort)} for {bbg.WidthInTiles}x{bbg.HeightInTiles}");
+                $"Map has {bbg.Map.Length} bytes, expected {entryCount * TileMapEntry.SIZE} for {bbg.WidthInTiles}x{bbg.HeightInTiles}");
 
         var entries = Enumerable.Range(0, entryCount)
-            .Select(i => new MapEntry(bbg.Map.Span.ReadUInt16(i * sizeof(ushort))))
+            .Select(i => new TileMapEntry(bbg.Map.Span.ReadUInt16(i * TileMapEntry.SIZE)))
             .ToArray();
-        var colors = Enumerable.Range(0, bbg.Palette.Length / sizeof(ushort))
-            .Select(i => Bgr555.ToRgb(bbg.Palette.Span.ReadUInt16(i * sizeof(ushort))))
+        var colors = Enumerable.Range(0, bbg.Palette.Length / Bgr555.SIZE)
+            .Select(i => Bgr555.ToRgb(bbg.Palette.Span.ReadUInt16(i * Bgr555.SIZE)))
             .ToArray();
         var tileBase = _TileBase(entries, bbg.TileCount);
 
@@ -48,19 +41,19 @@ public static class BbgRenderer
             pixels[offset] = color.Red;
             pixels[offset + 1] = color.Green;
             pixels[offset + 2] = color.Blue;
-            pixels[offset + 3] = 0xFF;
+            pixels[offset + 3] = OPAQUE;
         }
         
         return new RgbaImage(width, height, pixels);
     }
 
-    private static int _TileBase(MapEntry[] entries, int tileCount)
+    private static int _TileBase(TileMapEntry[] entries, int tileCount)
     {
         var maxTile = entries.Max(entry => entry.Tile);
         return maxTile < tileCount ? 0 : maxTile + 1 - tileCount;
     }
 
-    private static int? _ColorIndex(Bbg bbg, MapEntry entry, int tile, int x, int y)
+    private static int? _ColorIndex(Bbg bbg, TileMapEntry entry, int tile, int x, int y)
     {
         if (tile < 0 || tile >= bbg.TileCount)
             return null;

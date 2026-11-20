@@ -2,6 +2,8 @@
 
 public static class Bgr555
 {
+    public const int SIZE = 2;
+    
     private const int CHANNEL_MASK = 0x1F;
     private const int CHANNEL_SIZE = 5;
 

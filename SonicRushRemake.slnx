@@ -4,5 +4,6 @@
   <Project Path="Rush.Tools.BbgToPng/Rush.Tools.BbgToPng.csproj" />
   <Project Path="Rush.Tools.Extract/Rush.Tools.Extract.csproj" />
   <Project Path="Rush.Tools.ListFiles/Rush.Tools.ListFiles.csproj" />
+  <Project Path="Rush.Tools.MapToPng/Rush.Tools.MapToPng.csproj" />
   <Project Path="Rush.Web/Rush.Web.csproj" />
 </Solution>
